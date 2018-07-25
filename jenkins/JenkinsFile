@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'maven'
+        maven 'MAVEN_HOME'
 
     }
 
@@ -66,13 +66,7 @@ pipeline {
                 sh 'BUILD_ID=dontKillMe $DOCKER_HOME/docker container run -d -p 9092:8080 --name=shop shop:$BUILD_ID '
 
             }
-            post {
-                success {
-
-                    build job: 'shopizer-functional-tests', wait: false
-
-                }
-            }
+            
         }
     }
 
